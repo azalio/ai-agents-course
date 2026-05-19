@@ -6,7 +6,9 @@ services:
       POSTGRES_PASSWORD: app  # pragma: allowlist secret
       POSTGRES_DB: app
     ports:
-      - "5432:5432"
+      # Host-published на 25432, чтобы не конкурировать с локальным Postgres / podman gvproxy / Docker Desktop'овским postgres на 5432.
+      # Внутри compose-сети сервис всё ещё доступен как postgres:5432.
+      - "25432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -18,7 +20,8 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      # 26379:6379 — тот же приём, чтобы не воевать с локальным Redis.
+      - "26379:6379"
     volumes:
       - redisdata:/data
     healthcheck:
