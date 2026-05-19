@@ -1,0 +1,33 @@
+# Secrets
+.env
+.env.*
+!.env.example
+.secrets.baseline.backup
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# uv / build
+dist/
+build/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Локальные индексы / артефакты RAG
+data/local/
+vector_store/
+*.sqlite

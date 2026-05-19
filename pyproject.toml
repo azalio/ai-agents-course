@@ -1,0 +1,55 @@
+[project]
+name = "ai-agents-course"
+version = "0.1.0"
+description = "Applied AI / Agent engineering course — workspace"
+requires-python = ">=3.11"
+# TODO: обновить минорные версии перед стартом потока.
+dependencies = [
+  "pydantic>=2.7",
+  "pydantic-settings>=2.4",
+  "httpx>=0.28",
+  "python-dotenv>=1.0",
+  "loguru>=0.7",
+  "tenacity>=9.0",
+  "tiktoken>=0.7",
+  # Redis-клиент: idempotency и /readyz пинг с M01 lesson 04 + 06.
+  "redis>=5.0",
+  # HTTP-фреймворк курса: первый сервис llm-service в M01 lesson 02.
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "pytest>=8.3",
+  "pytest-asyncio>=0.23",
+  # ASGI lifespan для тестов: ASGITransport в httpx 0.28+ сам lifespan не гоняет,
+  # нужен явный LifespanManager. См. M01 lesson 06.
+  "asgi-lifespan>=2.1",
+  "pre-commit>=3.8",
+  "ipython>=8.26",
+  "detect-secrets>=1.5",
+]
+llm = [
+  # Floors подобраны под фичи M02: structured outputs в Messages API (Anthropic)
+  # и в Responses/Chat Completions API (OpenAI 2.x).
+  "anthropic>=0.77",
+  "openai>=2.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["shared"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = "-q"
+# pytest подхватывает root `tests/` (smoke) и `tests/` внутри каждого проекта/пакета.
+# Чтобы тесты модулей 01–07 (живущие в `projects/*/tests/`) реально запускались,
+# держим в testpaths верхнеуровневые каталоги, а не один `tests`.
+testpaths = ["tests", "projects", "shared"]
