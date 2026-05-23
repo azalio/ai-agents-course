@@ -57,10 +57,10 @@ doctor:     ## explain current local setup status
 	    printf "       owner lookup: podman ps --format '{{.Names}} {{.Ports}}'  (macOS Podman: lsof shows gvproxy, not compose project)\n"; \
 	  fi; \
 	done
-	@test -f .env.example && printf "[ok] .env.example\n" || printf "[missing] .env.example - copy scaffold dotfiles\n"
-	@test -f progress.md && printf "[ok] progress.md\n" || printf "[todo] progress.md - copy docs/module-00-intro/templates/progress.md\n"
-	@test -f positioning.md && printf "[ok] positioning.md\n" || printf "[todo] positioning.md - copy docs/module-00-intro/templates/positioning.md\n"
-	@test -f course-dashboard.md && printf "[ok] course-dashboard.md\n" || printf "[todo] course-dashboard.md - copy docs/module-00-intro/templates/course-dashboard.md\n"
+	@test -f .env.example && printf "[ok] .env.example\n" || printf "[missing] .env.example - re-create from template repo (azalio/ai-agents-course)\n"
+	@test -f progress.md && printf "[ok] progress.md\n" || printf "[todo] progress.md - cp templates/progress.md .\n"
+	@test -f positioning.md && printf "[ok] positioning.md\n" || printf "[todo] positioning.md - cp templates/positioning.md .\n"
+	@test -f course-dashboard.md && printf "[ok] course-dashboard.md\n" || printf "[todo] course-dashboard.md - cp templates/course-dashboard.md .\n"
 
 smoke:      ## quick smoke: up + lint + test
 	$(MAKE) up
