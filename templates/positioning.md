@@ -21,7 +21,7 @@
 
 ### A.2 Через 6 месяцев
 
-Кем я хочу быть и кому буду полезен. 5–10 предложений. Опираюсь на 10 компетенций из [lesson 00.2 — roadmap](https://github.com/azalio/ai-dev-course/blob/main/docs/module-00-intro/lesson-02-roadmap.md) (либо на сайте курса по пути `/module-00-intro/lesson-02-roadmap/`, если у тебя есть deployed URL).
+Кем я хочу быть и кому буду полезен. 5–10 предложений. Опираюсь на 10 компетенций AI Agent Engineer (см. список в [A.7](#a7-сильные-стороны-и-зоны-роста--текущие) ниже).
 
 ```
 <здесь>
@@ -38,7 +38,7 @@
 
 ### A.4 Target domain (грубо)
 
-Какой **домен** я нацелен исследовать. На этом этапе достаточно `primary` + 1–2 `adjacent` — грубая разметка. Детальный выбор делается в [lesson 07.1 — domain](https://github.com/azalio/ai-dev-course/blob/main/docs/module-07-capstone/lesson-01-domain.md) перед capstone'ом; **здесь не нужно искать «правильный» ответ**, нужна стартовая гипотеза, которую через 6 месяцев пересмотришь.
+Какой **домен** я нацелен исследовать. На этом этапе достаточно `primary` + 1–2 `adjacent` — грубая разметка (например, `primary: developer-tools`, `adjacent: ops, internal-knowledge`). Детальный выбор и метрики делаются перед capstone'ом в M07 на сайте курса; **здесь не нужно искать «правильный» ответ**, нужна стартовая гипотеза, которую через 6 месяцев пересмотришь.
 
 ```
 - Primary: <домен>
@@ -119,7 +119,25 @@
 
 ### A.7 Сильные стороны и зоны роста — текущие
 
-Возьми список 10 компетенций из [lesson 00.2 — roadmap](https://github.com/azalio/ai-dev-course/blob/main/docs/module-00-intro/lesson-02-roadmap.md) и оцени себя по шкале 0–3.
+Оцени себя по каждой из 10 компетенций AI Agent Engineer по шкале 0–3:
+
+- **0** — не знаком.
+- **1** — слышал / читал.
+- **2** — пробовал / собрал toy-проект.
+- **3** — есть production-experience.
+
+10 компетенций:
+
+1. **Prompt / context engineering** — спроектировать контекст так, чтобы агент стабильно решал задачу.
+2. **Tool use / function calling** — подключать внешние API, БД, CRM, GitHub; обрабатывать ошибки, retries, fallback.
+3. **Workflow / orchestration** — single-agent и multi-agent workflows, state machines, HITL.
+4. **Надёжность на длинных циклах** — state persistence, checkpoints, guardrails, recovery after failure.
+5. **Code generation pipelines** — coding agent с чтением кодовой базы, run_tests, patch review.
+6. **RAG / retrieval / knowledge grounding** — индексация, retrieval, reranking, ACL, версионирование знаний.
+7. **Интеграция в бизнес-процессы** — встраивание агента в support / sales / ops / internal automation.
+8. **Evaluation / observability** — evals, traces, regression gates, cost/latency.
+9. **Безопасность и контроль** — permission boundaries, sandboxing, prompt injection defense, audit.
+10. **Инфраструктура и продакшн** — deployment, queues, caching, rate limits, model routing, SLA.
 
 Сильные (балл 2–3):
 
@@ -135,6 +153,8 @@
 - <компетенция>: <план>
 - <компетенция>: <план>
 ```
+
+> В конце курса (M07 closure) перепиши этот блок — увидишь, какие компетенции выросли с 0→2 / 1→3.
 
 ---
 
@@ -159,7 +179,7 @@ Workflow: <название>
 
 ### B.2 Business metric (черновая)
 
-Из глоссария в [lesson 07.1 — domain](https://github.com/azalio/ai-dev-course/blob/main/docs/module-07-capstone/lesson-01-domain.md). На этом этапе достаточно «какую метрику буду двигать в принципе». Конкретные числа — после capstone’а.
+Возьми business metric из M07 lesson 01 (глоссарий метрик по доменам — открой на сайте курса, когда дойдёшь до M07). На этом этапе достаточно «какую метрику буду двигать в принципе». Конкретные числа — после capstone'а.
 
 ```
 Метрика: <название>
