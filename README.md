@@ -4,13 +4,28 @@
 
 ## Что внутри
 
+Конфиги и инфра:
+
 - `pyproject.toml` — PEP 621 + uv; deps + extras `dev` / `llm` под Anthropic и OpenAI SDK.
 - `Makefile` — `make dev / up / down / fmt / lint / test / doctor / smoke`.
 - `docker-compose.yml` — Postgres (pgvector) + Redis с healthchecks.
 - `.pre-commit-config.yaml` — ruff, mypy, detect-secrets, базовые хуки.
 - `ruff.toml`, `mypy.ini`, `.secrets.baseline` — конфиги линтера, тайп-чекера, scanner'а секретов.
 - `.env.example` — образец переменных окружения; ключи (Anthropic / OpenAI) заполняешь перед Module 02.
-- `tests/test_smoke.py` — placeholder, чтобы `make test` был зелёным на day 0.
+- `conftest.py` — root-level sys.path injector: добавляет `projects/*/` в `sys.path`, чтобы тесты импортировали свои package'и без editable-install (имена проектов с дефисом не попадают в `sys.path` автоматически). Подробнее — M01 lesson 02.
+
+Заготовка структуры monorepo (директории пустые, заполняются по мере прохождения):
+
+- `shared/` — общие хелперы (`shared.llm`, `shared.telemetry`, `shared.schemas`). Сейчас пустые package'и с `__init__.py`.
+- `projects/` — по одной директории на каждый сервис курса:
+  - `01-llm-service/` — M01: FastAPI каркас + retry/timeout + observability.
+  - `02-extract-service/` — M02: structured outputs, fallback policy, evals.
+  - `03-knowledge-bot/` — M03: RAG pipeline.
+  - `04-ops-agent/` — M04: tool-calling agent + codebase slice.
+  - `05-triage-agent/` — M05: orchestration + HITL.
+  - `07-capstone/` — M07: финальный capstone.
+- `evals/` — общие eval-наборы, scorecards, regression gates (M02+).
+- `tests/` — root-level smoke + cross-project tests; `test_smoke.py` уже зелёный.
 - `templates/` — заготовки `positioning.md`, `progress.md`, `case-study.md`, `course-dashboard.md`. Копируй в корень по мере прохождения курса.
 
 ## Старт
