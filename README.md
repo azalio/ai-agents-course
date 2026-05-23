@@ -24,9 +24,10 @@
   - `04-ops-agent/` — M04: tool-calling agent + codebase slice.
   - `05-triage-agent/` — M05: orchestration + HITL.
   - `07-capstone/` — M07: финальный capstone.
+  - **M06 проекта нет by design**: модуль 06 (reliability / evals / guardrails) — это hardening одного из существующих M01–M05 проектов на выбор, не отдельный сервис.
 - `evals/` — общие eval-наборы, scorecards, regression gates (M02+).
 - `tests/` — root-level smoke + cross-project tests; `test_smoke.py` уже зелёный.
-- `templates/` — заготовки `positioning.md`, `progress.md`, `case-study.md`, `course-dashboard.md`. Копируй в корень по мере прохождения курса.
+- `templates/` — заготовки `positioning.md` и `case-study.md`. Копируй в корень по мере прохождения курса.
 
 ## Старт
 
@@ -61,22 +62,20 @@ pre-commit run --all-files
 
 ## Как пользоваться `templates/`
 
-В `templates/` лежат markdown-заготовки, на которые ссылаются уроки M00:
+В `templates/` лежат markdown-заготовки, на которые ссылаются уроки курса:
 
-- `positioning.md` — позиционирование себя на рынке (Part A / B / C). На M00 заполняешь Part A.
-- `progress.md` — самооценка по 10 компетенциям AI agent engineer'а. Перепроходишь после каждого модуля.
-- `course-dashboard.md` — журнал прохождения (blockers с evidence, last green check, decisions, session log).
+- `positioning.md` — позиционирование себя на рынке (Part A / B / C). На M00 заполняешь Part A. **Единственный обязательный personal-артефакт M00.**
 - `case-study.md` — шаблон портфельного кейса. Заполняешь начиная с проектов M01.
 
-Копируешь нужный файл в корень репозитория и редактируешь:
+`positioning.md` копируешь в корень репозитория и редактируешь:
 
 ```bash
-cp templates/progress.md .
 cp templates/positioning.md .
-cp templates/course-dashboard.md .
 ```
 
-После копирования `make doctor` перестанет ругаться на missing-файлы.
+После копирования `make doctor` перестанет ругаться на missing-файл.
+
+> Прогресс по урокам копится автоматически на сайте курса (`/dashboard/` с галками). Free-form journal — на твоё усмотрение в `NOTES.md`, в pipeline курса он не интегрирован.
 
 ## Лицензия
 
