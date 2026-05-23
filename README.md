@@ -1,55 +1,83 @@
-# M00 Scaffold — готовые файлы
+# ai-agents-course
 
-Скопируй содержимое этой папки в корень своего нового репозитория `ai-agents-course/` **вместе с dotfiles** (`.env.example`, `.gitignore`, `.pre-commit-config.yaml`, `.secrets.baseline`). Безопасная команда — точка в конце source-пути:
+Стартовый workspace для курса **«AI Agent Engineer за 4–6 месяцев»** (production LLM-системы, RAG, tool-calling агенты, evals, reliability). Шаблонный репозиторий: жми **«Use this template»** или форкай, и через `make dev && make up && make test` у тебя зелёная инфраструктура — без бизнес-логики, без FastAPI-эндпоинтов, без LLM-вызовов. Всё это придёт начиная с Module 01.
 
-```bash
-cp -R /path/to/ai-dev-course/docs/module-00-intro/scaffold/. .
-```
+## Что внутри
 
-`cp -R scaffold/* .` (звёздочка без точки) **пропустит** dotfiles в большинстве шеллов — не используем эту форму.
+Конфиги и инфра:
 
-Если копируешь scaffold из локального checkout курса, сначала убедись, что в source-папке нет ignored runtime-мусора: `.venv/`, `.pytest_cache/`, `__pycache__/`, `.mypy_cache/`, `.ruff_cache/`. Эти директории не коммитятся, но обычный `cp -R .../. .` всё равно скопирует их в учебный репозиторий.
+- `pyproject.toml` — PEP 621 + uv; deps + extras `dev` / `llm` под Anthropic и OpenAI SDK.
+- `Makefile` — `make dev / up / down / fmt / lint / test / doctor / smoke`.
+- `docker-compose.yml` — Postgres (pgvector) + Redis с healthchecks.
+- `.pre-commit-config.yaml` — ruff, mypy, detect-secrets, базовые хуки.
+- `ruff.toml`, `mypy.ini`, `.secrets.baseline` — конфиги линтера, тайп-чекера, scanner'а секретов.
+- `.env.example` — образец переменных окружения; ключи (Anthropic / OpenAI) заполняешь перед Module 02.
+- `conftest.py` — root-level sys.path injector: добавляет `projects/*/` в `sys.path`, чтобы тесты импортировали свои package'и без editable-install (имена проектов с дефисом не попадают в `sys.path` автоматически). Подробнее — M01 lesson 02.
 
-Потом проверь `.env.example` и доделай TODO-комментарии в `pyproject.toml` (минор-версии могут устареть к моменту чтения). **Не понижай** минимум-версии SDK `anthropic` и `openai`: они выставлены под фичи M02 (structured outputs API). Поднимать вверх можно и нужно.
+Заготовка структуры monorepo (директории пустые, заполняются по мере прохождения):
 
-После копирования и `uv sync --extra dev --extra llm` у тебя должен зелёным проходить полный чек-лист из [lesson 00.4](../lesson-04-setup.md):
+- `shared/` — общие хелперы (`shared.llm`, `shared.telemetry`, `shared.schemas`). Сейчас пустые package'и с `__init__.py`.
+- `projects/` — по одной директории на каждый сервис курса:
+  - `01-llm-service/` — M01: FastAPI каркас + retry/timeout + observability.
+  - `02-extract-service/` — M02: structured outputs, fallback policy, evals.
+  - `03-knowledge-bot/` — M03: RAG pipeline.
+  - `04-ops-agent/` — M04: tool-calling agent + codebase slice.
+  - `05-triage-agent/` — M05: orchestration + HITL.
+  - `07-capstone/` — M07: финальный capstone.
+- `evals/` — общие eval-наборы, scorecards, regression gates (M02+).
+- `tests/` — root-level smoke + cross-project tests; `test_smoke.py` уже зелёный.
+- `templates/` — заготовки `positioning.md`, `progress.md`, `case-study.md`, `course-dashboard.md`. Копируй в корень по мере прохождения курса.
 
-- `make up` → `docker compose ps` показывает `postgres` и `redis` со статусом `running (healthy)`.
-- `make lint && make test` зелёные.
-- `pre-commit run --all-files` зелёный.
-- `make doctor` показывает missing/todo пункты понятным текстом, без поиска по всем урокам.
+## Старт
 
-Никакого FastAPI / `/healthz` / `/readyz` тут нет — это задача [Module 01](../../module-01-base/README.md).
-
-## Содержимое
-
-| Файл | Назначение |
-| --- | --- |
-| `pyproject.toml` | PEP 621 + uv; dependencies + extras dev / llm. |
-| `Makefile` | root-level `make dev / up / down / fmt / lint / test / doctor / smoke`. |
-| `docker-compose.yml` | postgres (pgvector) + redis с healthchecks. |
-| `.pre-commit-config.yaml` | ruff, mypy, detect-secrets, базовые хуки. |
-| `ruff.toml` | конфиг линтера и форматтера. |
-| `mypy.ini` | конфиг тайпчека. |
-| `.env.example` | шаблон секретов. |
-| `.gitignore` | базовый игнор. |
-| `.secrets.baseline` | стартовый baseline для `detect-secrets` (пустой `results`). |
-| `tests/test_smoke.py` | dummy-тест чтобы `make test` был зелёным. |
-
-## Создание пустых пакетов
-
-После копирования файлов выполни:
+Нужны установленные [`uv`](https://docs.astral.sh/uv/) и [Docker](https://www.docker.com/).
 
 ```bash
-mkdir -p shared/{llm,telemetry,schemas} projects/{01-llm-service,02-extract-service,03-knowledge-bot,04-ops-agent,05-triage-agent,07-capstone} evals tests
-touch shared/__init__.py shared/{llm,telemetry,schemas}/__init__.py
-for p in projects/*/; do echo "# $(basename $p) — заполняется в соответствующем модуле." > "$p/README.md"; done
+# 1. Создай свой репозиторий через GitHub: «Use this template» (зелёная кнопка).
+# 2. Клонируй и зайди.
+gh repo clone <your-user>/ai-agents-course
+cd ai-agents-course
+
+# 3. Подготовь окружение.
+make dev                # uv sync --extra dev --extra llm + pre-commit install
+cp .env.example .env    # заполнишь ANTHROPIC_API_KEY / OPENAI_API_KEY перед Module 02
+
+# 4. Локальная инфра.
+make up                 # postgres + redis
+make doctor             # объяснит, чего ещё не хватает
+
+# 5. Прогон проверок.
+make lint && make test
+pre-commit run --all-files
 ```
 
-Опционально пересобери `.secrets.baseline` под реальное состояние репо:
+Если всё зелёное — ты на «day zero» курса. Дальше идёшь по модулям M00 → M07.
+
+## Что НЕ входит
+
+- **FastAPI / `/healthz` / `/readyz`** — это уже Module 01.
+- **LLM-клиенты (Anthropic / OpenAI)** — Module 02 (SDK уже запинены в `pyproject.toml` extras, но клиент-обёртку и protocol-интерфейс ты пишешь там).
+- **Лекционные материалы курса** — они держатся в основном репозитории курса; этот repo — только пустой production-ready workspace.
+
+## Как пользоваться `templates/`
+
+В `templates/` лежат markdown-заготовки, на которые ссылаются уроки M00:
+
+- `positioning.md` — позиционирование себя на рынке (Part A / B / C). На M00 заполняешь Part A.
+- `progress.md` — самооценка по 10 компетенциям AI agent engineer'а. Перепроходишь после каждого модуля.
+- `course-dashboard.md` — журнал прохождения (blockers с evidence, last green check, decisions, session log).
+- `case-study.md` — шаблон портфельного кейса. Заполняешь начиная с проектов M01.
+
+Копируешь нужный файл в корень репозитория и редактируешь:
 
 ```bash
-uv run detect-secrets scan --baseline .secrets.baseline
+cp templates/progress.md .
+cp templates/positioning.md .
+cp templates/course-dashboard.md .
 ```
 
-И коммит: `chore: bootstrap monorepo`.
+После копирования `make doctor` перестанет ругаться на missing-файлы.
+
+## Лицензия
+
+Контент `templates/` — CC BY-SA 4.0 (как у курса). Конфиги (pyproject, Makefile, docker-compose, ruff/mypy) — общедоступный шаблон, бери и переиспользуй.
