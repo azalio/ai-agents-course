@@ -33,7 +33,7 @@ dev = [
   "detect-secrets>=1.5",
 ]
 llm = [
-  # Floors подобраны под фичи M02: structured outputs в Messages API (Anthropic)
+  # Минимум-версии подобраны под фичи M02: structured outputs в Messages API (Anthropic)
   # и в Responses/Chat Completions API (OpenAI 2.x).
   "anthropic>=0.77",
   "openai>=2.0",
