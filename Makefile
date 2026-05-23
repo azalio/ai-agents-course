@@ -51,12 +51,17 @@ doctor:     ## explain current local setup status
 	else \
 	  printf "[ok] compose runtime: %s\n" "$(COMPOSE)"; \
 	fi
-	@for port in 25432 26379; do \
-	  if command -v lsof >/dev/null 2>&1 && lsof -nP -iTCP:$$port -sTCP:LISTEN >/dev/null 2>&1; then \
-	    printf "[warn] port %s already has a listener; if make up fails, run make down in the workspace that owns it\n" "$$port"; \
-	    printf "       owner lookup: podman ps --format '{{.Names}} {{.Ports}}'  (macOS Podman: lsof shows gvproxy, not compose project)\n"; \
-	  fi; \
-	done
+	@OURS_UP=$$($(COMPOSE) ps -q 2>/dev/null | head -c1); \
+	if [ -n "$$OURS_UP" ]; then \
+	  printf "[ok] compose project containers are running (make up already done)\n"; \
+	else \
+	  for port in 25432 26379; do \
+	    if command -v lsof >/dev/null 2>&1 && lsof -nP -iTCP:$$port -sTCP:LISTEN >/dev/null 2>&1; then \
+	      printf "[warn] port %s already has a listener and current compose project is down; if make up fails, run make down in the workspace that owns it\n" "$$port"; \
+	      printf "       owner lookup: podman ps --format '{{.Names}} {{.Ports}}'  (macOS Podman: lsof shows gvproxy, not compose project)\n"; \
+	    fi; \
+	  done; \
+	fi
 	@test -f .env.example && printf "[ok] .env.example\n" || printf "[missing] .env.example - re-create from template repo (azalio/ai-agents-course)\n"
 	@test -f progress.md && printf "[ok] progress.md\n" || printf "[todo] progress.md - cp templates/progress.md .\n"
 	@test -f positioning.md && printf "[ok] positioning.md\n" || printf "[todo] positioning.md - cp templates/positioning.md .\n"
