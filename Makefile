@@ -63,9 +63,7 @@ doctor:     ## explain current local setup status
 	  done; \
 	fi
 	@test -f .env.example && printf "[ok] .env.example\n" || printf "[missing] .env.example - re-create from template repo (azalio/ai-agents-course)\n"
-	@test -f progress.md && printf "[ok] progress.md\n" || printf "[todo] progress.md - cp templates/progress.md .\n"
 	@test -f positioning.md && printf "[ok] positioning.md\n" || printf "[todo] positioning.md - cp templates/positioning.md .\n"
-	@test -f course-dashboard.md && printf "[ok] course-dashboard.md\n" || printf "[todo] course-dashboard.md - cp templates/course-dashboard.md .\n"
 
 smoke:      ## quick smoke: up + lint + test
 	$(MAKE) up
