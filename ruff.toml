@@ -1,5 +1,6 @@
 line-length = 100
 target-version = "py311"
+extend-exclude = ["**/data/code_repos/**"]
 
 [lint]
 select = [
@@ -21,3 +22,21 @@ ignore = [
 
 [lint.per-file-ignores]
 "tests/**" = ["B011"]
+"**/schemas/**" = ["RUF001"]
+"**/schemas.py" = ["RUF001"]
+"**/_keywords.py" = ["RUF001"]
+
+[lint.flake8-bugbear]
+# FastAPI dependency declarations intentionally call marker helpers in defaults.
+# Without this, idiomatic `Depends(...)` code from M01 trips B008.
+extend-immutable-calls = [
+  "fastapi.Body",
+  "fastapi.Cookie",
+  "fastapi.Depends",
+  "fastapi.File",
+  "fastapi.Form",
+  "fastapi.Header",
+  "fastapi.Path",
+  "fastapi.Query",
+  "fastapi.Security",
+]

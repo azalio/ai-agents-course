@@ -5,7 +5,7 @@ description = "Applied AI / Agent engineering course — workspace"
 requires-python = ">=3.11"
 # TODO: обновить минорные версии перед стартом потока.
 dependencies = [
-  "pydantic>=2.7",
+  "pydantic[email]>=2.7",
   "pydantic-settings>=2.4",
   "httpx>=0.28",
   "python-dotenv>=1.0",
@@ -53,3 +53,6 @@ addopts = "-q"
 # Чтобы тесты модулей 01–07 (живущие в `projects/*/tests/`) реально запускались,
 # держим в testpaths верхнеуровневые каталоги, а не один `tests`.
 testpaths = ["tests", "projects", "shared"]
+# Target repos for M04 codebase tools are fixtures. Root pytest must not collect
+# their own test suites; run those only through the sandboxed `run_tests` tool.
+norecursedirs = [".git", ".venv", ".pytest_cache", "__pycache__", "code_repos"]
