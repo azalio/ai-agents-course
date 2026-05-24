@@ -58,12 +58,34 @@ Reason: <одна строка — почему этот трек, что хоч
 
 ### A.4 Target domain (грубо) — обязательно для обоих треков
 
-Какой **домен** я нацелен исследовать. На этом этапе достаточно `primary` + 1–2 `adjacent` — грубая разметка (например, `primary: developer-tools`, `adjacent: ops, internal-knowledge`). Детальный выбор и метрики делаются перед capstone'ом в M07 на сайте курса; **здесь не нужно искать «правильный» ответ**, нужна стартовая гипотеза, которую через 6 месяцев пересмотришь.
+Какой **домен** я нацелен исследовать. На этом этапе достаточно `primary` + 1–2 `adjacent` — грубая разметка. Детальный выбор и метрики делаются перед capstone'ом в M07; **здесь не нужно искать «правильный» ответ**, нужна стартовая гипотеза, которую через 6 месяцев пересмотришь.
+
+11 доменов на 2026 в порядке убывания «лёгкости продать» снаружи (CV / собес / outreach hiring manager'у). Не путать с «лёгкостью реализации» — некоторые внизу списка проще собрать как pet-проект, но сложнее продать. Выбирай по тому, **зачем тебе курс** (job-hunt vs skill-upgrade) и где у тебя реальный доступ к данным:
+
+1. **Engineering productivity / coding agents** — PR-агенты, code review, миграции, docs-копилоты. Понятная аудитория, высокая ценность.
+2. **DevOps / SRE remediation** — агент ловит алерты, диагностирует по логам/metrics, предлагает (или с approval'ом выполняет) restart / scale / rollback. Стек: PagerDuty / Grafana / Datadog / k8s / Terraform.
+3. **Customer support** — Tier-1 ассистенты, knowledge-bots, deflection. Универсальная боль любого SaaS.
+4. **Sales / RevOps** — inbound lead triage, CRM enrichment, follow-up, contract drafting.
+5. **Recruiting / HR** — резюме-скрининг, outreach personalization, scheduling agent.
+6. **Internal knowledge / copilots** — «спроси у вики», onboarding-agent, policy-агент.
+7. **AP / invoice processing** — парсинг инвойсов (PDF/EDI), сверка с PO/контрактом, 3-way match, маршрутизация на approval. Очень понятный ROI.
+8. **Finance ops (прочее)** — expense review, vendor onboarding, fraud screening.
+9. **Legal docs** — contract review, clause extraction, compliance check.
+10. **ERP / backoffice workflow automation** — procurement, inventory, vendor management. Самый дорогой B2B-сегмент, самый сложный заход.
+11. **Marketing content / brand voice** — brand-aware copy, image, social. Больше про content-marketing продукты, чем enterprise.
+
+> **«Universal AI assistant» — НЕ в списке.** Если в твоём `primary` стоит «AI-помощник для всего» — это анти-паттерн, делай узкое.
+>
+> **Особый случай — personal job-search agent.** Не enterprise-вертикаль, а product-of-one: сервис, который ежедневно шлёт тебе в Telegram релевантные вакансии. Засчитывается как capstone только если ты реально на рынке. Иначе — side-track M04, не capstone.
+
+Заполни (домен можно своими словами или взять из списка):
 
 ```
-- Primary: <домен>
-- Adjacent: <домен 1>, <домен 2>
+- Primary: <домен — что собираешься исследовать как основной>
+- Adjacent: <домен 1>, <домен 2>  (1–2 смежных, куда navыки переносимы)
 ```
+
+> Пример (Engineering productivity primary): _Primary: Engineering productivity (coding agents для small Python codebases). Adjacent: DevOps SRE remediation (близкий стек: алерты + runbook agents), Internal knowledge (общая RAG-инфраструктура переносится). Не иду в: legal / finance / brand content — нет домена и нет данных._
 
 ### A.5 Чего я НЕ продаю 🎯 *(только job-hunt трек; skill-upgrade — пропусти)*
 
