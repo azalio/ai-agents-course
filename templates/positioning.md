@@ -37,6 +37,12 @@ Reason: <одна строка — почему этот трек, что хоч
 
 Кем я хочу быть и кому буду полезен. 5–10 предложений. Опираюсь на 10 компетенций AI Agent Engineer — список и шкала 0–3 в секции A.7 ниже. Для skill-upgrade трека пиши не «целевая роль», а **«чем я буду полезен на текущей работе через 6 месяцев»**: какой workflow в команде закроешь, какую компетенцию внутри команды добавишь, какой internal-портфельный кейс соберёшь.
 
+> Пример 🎯 **job-hunt** трек:
+> _Через 6 месяцев перейду на роль Applied AI / AI Agent Engineer в B2B SaaS компании среднего размера (50–500 человек) или AI-first startup. Буду собирать production LLM-системы: классификация и extraction поверх Anthropic/OpenAI API с structured outputs и evals, RAG на корпоративные knowledge base'ы (pgvector / Qdrant) с retrieval evals и refusal'ом, tool-calling агенты под operational workflows (триаж тикетов / синтез отчётов / job-search assistants) с permission boundaries и audit log. Сильные стороны на входе — Python backend (FastAPI / async / Postgres), DevOps-base; качаю prompt engineering (1→3), RAG (0→2), tool use и evals (0→2). К концу курса предъявляю на собесах: 4 рабочих сервиса (`llm-service`, `extract-service`, `knowledge-bot`, `ops-agent`) с CASE\_STUDY.md и scorecards, hardened вариант одного из них (M06), capstone-проект под выбранный домен (поддержка / sales / dev tools). Не претендую на роли GenAI/ML researcher, fine-tuning, custom model training — это другая компетенция._
+
+> Пример 📈 **skill-upgrade** трек:
+> _Через 6 месяцев у меня в команде backend-разработки внутри [текущая компания] закрыт один реальный AI-workflow: автоматизация триажа bug reports из support → классификация → создание Jira issue с structured fields. Уверенно собираю production LLM-feature: structured outputs с evals, fallback на cheaper model при rate limit'е, retry с idempotency, observability через Langfuse, regression gate в CI на schema conformance. Понимаю, когда RAG нужен, когда tool use, когда обычный prompt; могу аргументированно отказаться от LLM в feature, где он не нужен. К концу курса в портфолио внутри компании: одна реально внедрённая фича + 3 hands-on проекта из курса как proof-of-skill. Если когда-нибудь решу job-hunt'ить — вернусь и заполню A.1 / A.3 / A.6._
+
 ```
 <здесь>
 ```
